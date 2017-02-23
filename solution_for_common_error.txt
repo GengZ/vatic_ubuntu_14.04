@@ -1,0 +1,271 @@
+问题一：
+
+vatic@ubuntu:~/pyvision$ pwd
+/home/vatic/pyvision
+vatic@ubuntu:~/pyvision$ sudo python setup.py install
+building liblinear
+make: Entering directory `/home/vatic/pyvision/vision/liblinear'
+g++ -Wall -Wconversion -O2 -fPIC -c -o tron.o tron.cpp
+g++ -Wall -Wconversion -O2 -fPIC -c -o linear.o linear.cpp
+linear.cpp: In function ‘model* load_model(const char*)’:
+linear.cpp:1832:24: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+   fscanf(fp,"%80s",cmd);
+                        ^
+linear.cpp:1835:25: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+    fscanf(fp,"%80s",cmd);
+                         ^
+linear.cpp:1855:29: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+    fscanf(fp,"%d",&nr_class);
+                             ^
+linear.cpp:1860:31: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+    fscanf(fp,"%d",&nr_feature);
+                               ^
+linear.cpp:1865:26: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+    fscanf(fp,"%lf",&bias);
+                          ^
+linear.cpp:1877:38: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(fp,"%d",&model_->label[i]);
+                                      ^
+linear.cpp:1904:44: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+    fscanf(fp, "%lf ", &model_->w[i*nr_w+j]);
+                                            ^
+linear.cpp:1905:19: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+   fscanf(fp, "\n");
+                   ^
+make -C blas OPTFLAGS='-Wall -Wconversion -O2 -fPIC' CC='cc';
+make[1]: Entering directory `/home/vatic/pyvision/vision/liblinear/blas'
+cc -Wall -Wconversion -O2 -fPIC  -c dnrm2.c
+cc -Wall -Wconversion -O2 -fPIC  -c daxpy.c
+cc -Wall -Wconversion -O2 -fPIC  -c ddot.c
+cc -Wall -Wconversion -O2 -fPIC  -c dscal.c
+ar rcv blas.a dnrm2.o daxpy.o ddot.o dscal.o   
+a - dnrm2.o
+a - daxpy.o
+a - ddot.o
+a - dscal.o
+ranlib  blas.a
+make[1]: Leaving directory `/home/vatic/pyvision/vision/liblinear/blas'
+g++ -Wall -Wconversion -O2 -fPIC -o train train.c tron.o linear.o blas/blas.a
+g++ -Wall -Wconversion -O2 -fPIC -o predict predict.c tron.o linear.o blas/blas.a
+make: Leaving directory `/home/vatic/pyvision/vision/liblinear'
+running install
+running bdist_egg
+running egg_info
+creating pyvision.egg-info
+writing pyvision.egg-info/PKG-INFO
+writing top-level names to pyvision.egg-info/top_level.txt
+writing dependency_links to pyvision.egg-info/dependency_links.txt
+writing manifest file 'pyvision.egg-info/SOURCES.txt'
+reading manifest file 'pyvision.egg-info/SOURCES.txt'
+writing manifest file 'pyvision.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+running build_py
+creating build
+creating build/lib.linux-x86_64-2.7
+creating build/lib.linux-x86_64-2.7/vision
+copying vision/cluster.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/pascal.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/visualize.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/__init__.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/drawer.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/autoreload.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/frameiterators.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/toymaker.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/detectionreader.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/flickr.py -> build/lib.linux-x86_64-2.7/vision
+copying vision/ffmpeg.py -> build/lib.linux-x86_64-2.7/vision
+creating build/lib.linux-x86_64-2.7/vision/track
+copying vision/track/interpolation.py -> build/lib.linux-x86_64-2.7/vision/track
+copying vision/track/__init__.py -> build/lib.linux-x86_64-2.7/vision/track
+copying vision/track/util.py -> build/lib.linux-x86_64-2.7/vision/track
+creating build/lib.linux-x86_64-2.7/vision/alearn
+copying vision/alearn/__init__.py -> build/lib.linux-x86_64-2.7/vision/alearn
+creating build/lib.linux-x86_64-2.7/vision/reporting
+copying vision/reporting/__init__.py -> build/lib.linux-x86_64-2.7/vision/reporting
+copying vision/reporting/track.py -> build/lib.linux-x86_64-2.7/vision/reporting
+creating build/lib.linux-x86_64-2.7/vision/reconstruction
+copying vision/reconstruction/__init__.py -> build/lib.linux-x86_64-2.7/vision/reconstruction
+copying vision/reconstruction/plywriter.py -> build/lib.linux-x86_64-2.7/vision/reconstruction
+copying vision/reconstruction/pmvs.py -> build/lib.linux-x86_64-2.7/vision/reconstruction
+copying vision/reconstruction/bundler.py -> build/lib.linux-x86_64-2.7/vision/reconstruction
+running build_ext
+cythoning vision/annotations.pyx to vision/annotations.c
+Traceback (most recent call last):
+  File "setup.py", line 70, in <module>   ext_modules = ext_modules,
+  File "/usr/lib/python2.7/distutils/core.py", line 151, in setup   dist.run_commands()
+  File "/usr/lib/python2.7/distutils/dist.py", line 953, in run_commands    self.run_command(cmd)
+  File "/usr/lib/python2.7/distutils/dist.py", line 972, in run_command    cmd_obj.run()
+  File "/usr/lib/python2.7/dist-packages/setuptools/command/install.py", line 73, in run    self.do_egg_install()
+  File "/usr/lib/python2.7/dist-packages/setuptools/command/install.py", line 88, in do_egg_install    self.run_command('bdist_egg')
+  File "/usr/lib/python2.7/distutils/cmd.py", line 326, in run_command    self.distribution.run_command(command)
+  File "/usr/lib/python2.7/distutils/dist.py", line 972, in run_command    cmd_obj.run()
+  File "/usr/lib/python2.7/dist-packages/setuptools/command/bdist_egg.py", line 185, in run    cmd = self.call_command('install_lib', warn_dir=0)
+  File "/usr/lib/python2.7/dist-packages/setuptools/command/bdist_egg.py", line 171, in call_command    self.run_command(cmdname)
+  File "/usr/lib/python2.7/distutils/cmd.py", line 326, in run_command    self.distribution.run_command(command)
+  File "/usr/lib/python2.7/distutils/dist.py", line 972, in run_command    cmd_obj.run()
+  File "/usr/lib/python2.7/dist-packages/setuptools/command/install_lib.py", line 21, in run    self.build()
+  File "/usr/lib/python2.7/distutils/command/install_lib.py", line 111, in build    self.run_command('build_ext')
+  File "/usr/lib/python2.7/distutils/cmd.py", line 326, in run_command    self.distribution.run_command(command)
+  File "/usr/lib/python2.7/distutils/dist.py", line 972, in run_command    cmd_obj.run()
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Distutils/build_ext.py", line 164, in run    _build_ext.build_ext.run(self)
+  File "/usr/lib/python2.7/distutils/command/build_ext.py", line 337, in run  self.build_extensions()
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Distutils/build_ext.py", line 171, in build_extensions
+    ext.sources = self.cython_sources(ext.sources, ext)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Distutils/build_ext.py", line 324, in cython_sources
+    full_module_name=module_name)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Main.py", line 682, in compile
+    return compile_single(source, options, full_module_name)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Main.py", line 635, in compile_single
+    return run_pipeline(source, options, full_module_name)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Main.py", line 492, in run_pipeline
+    err, enddata = Pipeline.run_pipeline(pipeline, source)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Pipeline.py", line 365, in run_pipeline
+    data = phase(data)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Pipeline.py", line 53, in generate_pyx_code_stage
+    module_node.process_implementation(options, result)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ModuleNode.py", line 131, in process_implementation
+    self.generate_c_code(env, options, result)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ModuleNode.py", line 359, in generate_c_code
+    self.body.generate_function_definitions(env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 435, in generate_function_definitions
+    stat.generate_function_definitions(env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 435, in generate_function_definitions
+    stat.generate_function_definitions(env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 4635, in generate_function_definitions
+    self.body.generate_function_definitions(self.scope, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 435, in generate_function_definitions
+    stat.generate_function_definitions(env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 3067, in generate_function_definitions
+    FuncDefNode.generate_function_definitions(self, env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 1944, in generate_function_definitions
+    self.generate_function_body(env, code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 1698, in generate_function_body
+    self.body.generate_execution_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 441, in generate_execution_code
+    stat.generate_execution_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 4785, in generate_execution_code
+    self.generate_rhs_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/Nodes.py", line 5072, in generate_rhs_evaluation_code
+    self.rhs.generate_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 699, in generate_evaluation_code
+    self.generate_subexpr_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 714, in generate_subexpr_evaluation_code
+    node.generate_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 10498, in generate_evaluation_code
+    super(NumBinopNode, self).generate_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 699, in generate_evaluation_code
+    self.generate_subexpr_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 714, in generate_subexpr_evaluation_code
+    node.generate_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 699, in generate_evaluation_code
+    self.generate_subexpr_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 714, in generate_subexpr_evaluation_code
+    node.generate_evaluation_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 705, in generate_evaluation_code
+    self.generate_result_code(code)
+  File "/usr/local/lib/python2.7/dist-packages/Cython-0.24-py2.7-linux-x86_64.egg/Cython/Compiler/ExprNodes.py", line 3737, in generate_result_code
+    self.type, self.base.type)
+AssertionError: unexpected type long and base type tuple object for indexing
+
+解决方案：
+1、check cython's version：  cython -V
+vatic@ubuntu:~/pyvision$ cython -V
+Cython version 0.24
+
+2、remove Cython version 0.24、install Cython version 0.20
+sudo easy_install -m cython
+sudo easy_install -U cython==0.20
+
+OR 
+sudo pip install cython==0.20 
+
+
+
+
+
+问题二： 配置信息      
+vatic@ubuntu:~/vatic$ vim config.py
+signature   = "" # AWS secret access key
+accesskey   = "" # AWS access key ID
+sandbox     = "" #True # if true, put on workersandbox.mturk.com
+localhost   = "http://localhost/" # your local host
+database    = "mysql://root:root@localhost/vatic" # server://user:pass@localhost/dbname
+geolocation = "" # api key for ipinfodb.com   #这个配置置空了
+maxobjects = 25;
+# probably no need to mess below this line
+import multiprocessing
+processes = multiprocessing.cpu_count()
+
+import os.path
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+
+
+
+【解决方案】
+sudo easy_install -m cython
+sudo easy_install -U cython==0.20
+
+
+
+
+
+
+
+
+问题三：  http://www.lxway.com/842851246.htm
+
+[Fri May 13 14:32:26.949970 2016] mod_wsgi (pid=3338): Target WSGI script '/home/vatic/vatic/server.py' cannot be loaded as Python module.
+[Fri May 13 14:32:26.950557 2016] mod_wsgi (pid=3338): Exception occurred processing WSGI script '/home/vatic/vatic/server.py'.
+[Fri May 13 14:32:26.950872 2016] Traceback (most recent call last):
+[Fri May 13 14:32:26.951184 2016]   File "/home/vatic/vatic/server.py", line 8, in <module>
+[Fri May 13 14:32:26.951784 2016]     from turkic.server import handler, application
+[Fri May 13 14:32:26.952156 2016]   File "/usr/local/lib/python2.7/dist-packages/turkic-0.2.5-py2.7.egg/turkic/server.py", line 15, in <module>
+[Fri May 13 14:32:26.960437 2016]     from turkic.database import session
+[Fri May 13 14:32:26.961490 2016]   File "/usr/local/lib/python2.7/dist-packages/turkic-0.2.5-py2.7.egg/turkic/database.py", line 12, in <module>
+[Fri May 13 14:32:26.961909 2016]     from sqlalchemy import create_engine
+[Fri May 13 14:32:26.962142 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/__init__.py", line 9, in <module>
+[Fri May 13 14:32:26.962534 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/sql/__init__.py", line 8, in <module>
+[Fri May 13 14:32:26.963555 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/sql/expression.py", line 31, in <module>
+[Fri May 13 14:32:26.964792 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/sql/functions.py", line 11, in <module>
+[Fri May 13 14:32:26.965310 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/sql/sqltypes.py", line 17, in <module>
+[Fri May 13 14:32:26.966839 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/processors.py", line 128, in <module>
+[Fri May 13 14:32:26.967501 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/cprocessors.py", line 7, in <module>
+[Fri May 13 14:32:26.969733 2016]   File "build/bdist.linux-x86_64/egg/sqlalchemy/cprocessors.py", line 4, in __bootstrap__
+[Fri May 13 14:32:26.970950 2016]   File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 936, in resource_filename
+[Fri May 13 14:32:26.974003 2016]     self, resource_name
+[Fri May 13 14:32:26.974399 2016]   File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 1567, in get_resource_filename
+[Fri May 13 14:32:26.975860 2016]     self._extract_resource(manager, self._eager_to_zip(name))
+[Fri May 13 14:32:26.980864 2016]   File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 1595, in _extract_resource
+[Fri May 13 14:32:26.982276 2016]     self.egg_name, self._parts(zip_path)
+[Fri May 13 14:32:26.982597 2016]   File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 1002, in get_cache_path
+[Fri May 13 14:32:26.982858 2016]     self.extraction_error()
+[Fri May 13 14:32:26.983152 2016]   File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 982, in extraction_error
+[Fri May 13 14:32:26.983556 2016]     raise err
+[Fri May 13 14:32:26.983789 2016] ExtractionError: Can't extract file(s) to egg cache
+[Fri May 13 14:32:26.983942 2016] 
+[Fri May 13 14:32:26.984164 2016] The following error occurred while trying to extract file(s) to the Python egg
+[Fri May 13 14:32:26.984313 2016] cache:
+[Fri May 13 14:32:26.984498 2016] 
+[Fri May 13 14:32:26.984638 2016]   [Errno 13] Permission denied: '/var/www/.python-eggs'
+[Fri May 13 14:32:26.984815 2016] 
+[Fri May 13 14:32:26.992586 2016] The Python egg cache directory is currently set to:
+[Fri May 13 14:32:26.993211 2016] 
+[Fri May 13 14:32:26.993285 2016]   /var/www/.python-eggs
+[Fri May 13 14:32:26.993317 2016] 
+[Fri May 13 14:32:26.993335 2016] Perhaps your account does not have write access to this directory?  You can
+[Fri May 13 14:32:26.993351 2016] change the cache directory by setting the PYTHON_EGG_CACHE environment
+[Fri May 13 14:32:26.993367 2016] variable to point to an accessible directory.
+[Fri May 13 14:32:26.993383 2016] 
+
+
+【解决方案】
+
+解决办法是在开始的文件前面加上了这段代码
+import os,sys
+os.environ['PYTHON_EGG_CACHE'] = '/tmp/.python-eggs'
+abspath = os.path.dirname(__file__)
+sys.path.append(abspath)
+os.chdir(abspath)
