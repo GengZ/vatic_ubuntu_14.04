@@ -23,7 +23,15 @@ Basiclly follow the installation instruction of [original version](https://githu
 1. some solutions for common **ERROR** is documented in *solutions.txt* in this repo. 
   *Note*:
   for the 3rd item in solutions.txt, it refers to the step where open the link after publishing. At that time, if you come across **SERVER  ERROR** on your screen when using the link given by *publishing*, check the /var/log/apache2/er\* file. If the content is identical with  the 3rd item, then try the solution :)
-  
+
+2. **ERROR** 
+
+```
+Could not reliably determine the server's fully qualified domain name, using 127.0.1.1.Set the 'ServerName' directive globally to suppress this message
+```
+ **SOLUTION:**
+   Add **ServerName 127.0.0.1** in file: /etc/apache2/apache2.conf
+   then run: sudo apache2ctl graceful
 ***  
 
 Any issue is welcome :) 
