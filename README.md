@@ -35,3 +35,9 @@ Could not reliably determine the server's fully qualified domain name, using 127
 ***  
 
 Any issue is welcome :) 
+
+1. 1st
+```bash
+$ cd
+```
+2. 2nd
